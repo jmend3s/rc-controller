@@ -19,9 +19,10 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
+#include <cstring>
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -94,18 +95,20 @@ int main(void)
   MX_RNG_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-
+  char const* str = "Serial online @qq5200 8N1\r\n";
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    /* USER CODE END WHILE */
     HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_6);
-    HAL_Delay(200);
-    /* USER CODE BEGIN 3 */
+    HAL_UART_Transmit(&huart2, (uint8_t*)str, strlen(str), HAL_MAX_DELAY);
+    HAL_Delay(1000);
   }
+    /* USER CODE END WHILE */
+
+    /* USER CODE BEGIN 3 */
   /* USER CODE END 3 */
 }
 
